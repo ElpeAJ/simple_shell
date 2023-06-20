@@ -30,8 +30,6 @@ int main(void)
 	{
 		printf("Command read: %s", word);
 	}
-
-	free(word);
 	}
 
 	return (0);
