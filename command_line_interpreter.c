@@ -12,28 +12,28 @@
 
 int main(void)
 {
-	char *args[] = {" ", NULL};
+	char *args[] = {NULL};
+	char *command = NULL;
+	size_t length = 0;
+	ssize_t r = 0;
+	char *const env[] = {NULL};
 
 	while (1)
 	{
-		char *word = NULL;
-		size_t length = 0;
-		ssize_t r = 0;
-
-		printf("Waiting for your command: \n");
-		r = getline(&word, &length, stdin);
+		printf("$");
+		r = getline(&command, &length, stdin);
+		printf("\n");
 
 		if (r == -1)
 		{
 			perror("Error");
-			exit(1);
 		}
 		else if (r != -1)
 		{
-			execve(word, args, __environ);
+			execve(command, args, env);
 			perror("execve");
-			exit(1);
 		}
+		free(command);
 	}
 
 	return (0);
