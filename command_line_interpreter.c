@@ -33,13 +33,12 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 			printf("\n");
 			exit(status_code);
 		}
-		if (stat(token, &sb) == -1)
+		if (token != NULL)
 		{
-			status_code = _perror(argv[0], command_number, token);
-		}
-		else
-		{
-			status_code = _fork(token, args);
+			if (stat(token, &sb) == -1)
+				status_code = _perror(argv[0], command_number, token);
+			else
+				status_code = _fork(token, args);
 		}
 		command_number++;
 		command = NULL;
