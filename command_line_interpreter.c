@@ -54,9 +54,9 @@ int main(void)
 		}
 		else
 		{
-			wait (NULL);
+			wait(NULL);
 		}
-		
+
 		command = NULL;
 
 		token = NULL;
