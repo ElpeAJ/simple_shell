@@ -1,12 +1,11 @@
 #include "main.h"
 
 /**
- * main - function
- *
+ * main - function prototype
+ * @argc: argument count of passed argument
+ * @argv: argument vector
  * Return: 0
- *
  */
-
 int main(__attribute((unused))int argc, char **argv)
 		{
 	char *args[] = {NULL, NULL};
@@ -36,6 +35,5 @@ int main(__attribute((unused))int argc, char **argv)
 		command = NULL;
 		token = NULL;
 	}
-
 	return (0);
 }
