@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 
 /**
  * main - function
@@ -23,26 +21,17 @@ int main(void)
 	while (1)
 	{
 		printf("$");
-		fflush(stdout);
-
 		r = getline(&command, &length, stdin);
+		printf("\n");
 
 		if (r == -1)
 		{
 			perror("Error");
-			return (1);
 		}
-		else if (r == 0)
+		else if (r != -1)
 		{
-			if (execve(command, args, env) == -1)
-			{
+			execve(command, args, env);
 			perror("execve");
-			return (1);
-			}
-		}
-		else
-		{
-			wait (NULL);
 		}
 		free(command);
 	}
