@@ -33,7 +33,6 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 			printf("\n");
 			exit(status_code);
 		}
-
 		if (stat(token, &sb) == -1)
 		{
 			status_code = _perror(argv[0], command_number, token);
@@ -42,9 +41,7 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 		{
 			status_code = _fork(token, args);
 		}
-
 		command_number++;
-
 		command = NULL;
 		token = NULL;
 	}
