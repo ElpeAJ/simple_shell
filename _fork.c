@@ -33,7 +33,7 @@ int _fork(char *token, char **args)
 		wait(&child_status);
 
 		if (WIFEXITED(child_status))
-			status = WEXITSTATUS(child_status);
+			child_status = WEXITSTATUS(child_status);
 		if (!isatty(STDIN_FILENO))
 			return (child_status);
 	}

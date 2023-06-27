@@ -6,14 +6,16 @@
  * @argv: argument vector
  * Return: 0
  */
-int main(__attribute((unused))int argc, char **argv)
-		{
+int main(__attribute((unused))int argc, __attribute((unused))char **argv)
+{
+	int status_code = 0;
 	char *args[] = {NULL, NULL};
 	char *command = NULL;
 	size_t length = 0;
 	ssize_t r = 0;
 	char *token;
 	int command_number = 1;
+	struct stat sb;
 
 	while (1)
 	{
@@ -27,9 +29,20 @@ int main(__attribute((unused))int argc, char **argv)
 		args[0] = token;
 
 		if (r == -1)
-			exit(0);
+		{
+			printf("\n");
+			exit(status_code);
+		}
 
-		_fork(token, args);
+		if (stat(token, &sb) == -1)
+		{
+			status_code = _perror(argv[0], command_number, token);
+		}
+		else
+		{
+			status_code = _fork(token, args);
+		}
+
 		command_number++;
 
 		command = NULL;
