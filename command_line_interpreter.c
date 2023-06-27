@@ -13,7 +13,7 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 	char *command = NULL;
 	size_t length = 0;
 	ssize_t r = 0;
-	char *token;
+	char *token = NULL;
 	int command_number = 1;
 	struct stat sb;
 
@@ -25,22 +25,25 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 
 		r = getline(&command, &length, stdin);
 
-		token = strtok(command, " \n");
-		args[0] = token;
-
 		if (r == -1)
 		{
+			free(command);
+			free(token);
 			printf("\n");
 			exit(status_code);
 		}
+		token = strtok(command, " \n");
 		if (token != NULL)
 		{
+			args[0] = token;
 			if (stat(token, &sb) == -1)
 				status_code = _perror(argv[0], command_number, token);
 			else
 				status_code = _fork(token, args);
+			free(token);
 		}
 		command_number++;
+		free(command);
 		command = NULL;
 		token = NULL;
 	}
