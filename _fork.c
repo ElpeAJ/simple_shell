@@ -10,6 +10,7 @@
 
 int _fork(char *token, char **args)
 {
+	int child_status = 0;
 	pid_t child_process;
 
 	child_process = fork();
@@ -29,7 +30,12 @@ int _fork(char *token, char **args)
 	}
 	else
 	{
-		wait(NULL);
+		wait(&child_status);
+	
+		if (WIFEXITED(child_status))
+			status = WEXITSTATUS(child_status);
+		if (!isatty(STDIN_FILENO))
+			return (child_status);
 	}
 
 	return (0);

@@ -7,13 +7,14 @@
  *
  */
 
-int main(void)
-{
+int main(__attribute((unused))int argc, char **argv)
+		{
 	char *args[] = {NULL, NULL};
 	char *command = NULL;
 	size_t length = 0;
 	ssize_t r = 0;
 	char *token;
+	int command_number = 1;
 
 	while (1)
 	{
@@ -30,6 +31,7 @@ int main(void)
 			exit(0);
 
 		_fork(token, args);
+		command_number++;
 
 		command = NULL;
 		token = NULL;

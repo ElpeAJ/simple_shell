@@ -9,4 +9,6 @@
 #include <sys/wait.h>
 
 int _fork(char *token, char **args);
+int _perror(char *filename, int commmand_number, char *wrong_command);
+
 #endif
