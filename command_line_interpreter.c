@@ -44,7 +44,7 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 	}
 
 	free(command);
-	free(token);
+	/* free(token); */
 	command = NULL;
 	token = NULL;
 	return (0);
