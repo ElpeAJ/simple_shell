@@ -8,7 +8,7 @@
  */
 int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 {
-	int status_code = 0;
+	int status_code;
 	char *args[] = {NULL, NULL};
 	char *command = NULL;
 	size_t length = 0;
@@ -28,7 +28,6 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 		if (r == -1)
 		{
 			free(command);
-			free(token);
 			printf("\n");
 			exit(status_code);
 		}
@@ -40,12 +39,13 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 				status_code = _perror(argv[0], command_number, token);
 			else
 				status_code = _fork(token, args);
-			free(token);
 		}
 		command_number++;
-		free(command);
-		command = NULL;
-		token = NULL;
 	}
+
+	free(command); 
+	free(token);
+	command = NULL;
+	token = NULL;
 	return (0);
 }
