@@ -43,7 +43,7 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 		command_number++;
 	}
 
-	free(command); 
+	free(command);
 	free(token);
 	command = NULL;
 	token = NULL;
