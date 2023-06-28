@@ -9,20 +9,19 @@
 int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 {
 	int status_code;
-	char *args[] = {NULL, NULL};
+	char delimiter[] = {' ', '\n'};
+	char **args = malloc(sizeof(char *) * 2048); 
 	char *command = NULL;
 	size_t length = 0;
+	int i = 0;
 	ssize_t r = 0;
-	char *token = NULL;
 	int command_number = 1;
 	struct stat sb;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("$ ");
-		fflush(stdout);
-
+			printf("#cisfun$ ");
 		r = getline(&command, &length, stdin);
 
 		if (r == -1)
@@ -31,21 +30,22 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 			printf("\n");
 			exit(status_code);
 		}
-		token = strtok(command, " \n");
-		if (token != NULL)
+		i = 0;
+		args = _tokenizer(command, delimiter);
+		while (args[i] != NULL)
 		{
-			args[0] = token;
-			if (stat(token, &sb) == -1)
-				status_code = _perror(argv[0], command_number, token);
+			if (stat(args[i], &sb) == -1)
+				status_code = _perror(argv[i], command_number, args[i]);
 			else
-				status_code = _fork(token, args);
+				status_code = _fork(args[i], args);
+			command_number++;
+			i++;
 		}
-		command_number++;
 	}
-
 	free(command);
-	/* free(token); */
+	for (i = 0; args[i] != NULL; i++) /* free the array of strings */
+		free(args[i]);
+	free(args);
 	command = NULL;
-	token = NULL;
 	return (0);
 }
