@@ -20,7 +20,7 @@ int _fork(char *token, char **args)
 		perror("Error");
 		return (1);
 	}
-	else if (child_process == 0)
+	if (child_process == 0)
 	{
 		if (execve(token, args, __environ) == -1)
 		{
