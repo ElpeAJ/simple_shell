@@ -11,6 +11,7 @@
 int _fork(char *token, char **args)
 {
 	int child_status = 0;
+	char **env = environ;
 	pid_t child_process;
 
 	child_process = fork();
@@ -22,7 +23,7 @@ int _fork(char *token, char **args)
 	}
 	if (child_process == 0)
 	{
-		if (execve(token, args, environ) == -1)
+		if (execve(token, args, env) == -1)
 		{
 			perror("execve");
 			return (1);
