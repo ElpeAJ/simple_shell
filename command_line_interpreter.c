@@ -10,7 +10,7 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 {
 	int status_code;
 	char delimiter[] = {' ', '\n'};
-	char **args = malloc(sizeof(char *) * 2048);
+	char **args = NULL;
 	char *command = NULL;
 	size_t length = 0;
 	int i = 0;
@@ -40,11 +40,10 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 			command_number++;
 			i++;
 		}
+		for (i = 0; args[i] != NULL; i++)
+			free(args[i]);
+		free(args);
 	}
-	free(command);
-	for (i = 0; args[i] != NULL; i++) /* free the array of strings */
-		free(args[i]);
-	free(args);
 	command = NULL;
 	return (0);
 }
