@@ -27,7 +27,6 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 		if (r == -1)
 		{
 			free(command);
-			printf("\n");
 			exit(status_code);
 		}
 		i = 0;
