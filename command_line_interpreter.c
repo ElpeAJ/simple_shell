@@ -8,8 +8,8 @@
  */
 int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 {
-	int status_code;
-	char delimiter[] = {' ', '\n'};
+	int status_code = 0;
+	char *delimiter = " \t\n\r";
 	char **args = NULL;
 	char *command = NULL;
 	size_t length = 0;
@@ -29,16 +29,14 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 			free(command);
 			exit(status_code);
 		}
-		i = 0;
 		args = _tokenizer(command, delimiter);
-		if (args[i] != NULL)
+		if (args[0] != NULL)
 		{
-			if (stat(args[i], &sb) == -1)
-				status_code = _perror(argv[i], command_number, args[i]);
+			if (stat(args[0], &sb) == -1)
+				status_code = _perror(argv[0], command_number, args[0]);
 			else
-				status_code = _fork(args[i], args);
+				status_code = _fork(args[0], args);
 			command_number++;
-			i++;
 		}
 		for (i = 0; args[i] != NULL; i++)
 			free(args[i]);
