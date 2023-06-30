@@ -15,6 +15,7 @@ int _fork(char *token, char **args)
 	pid_t child_process;
 
 	child_process = fork();
+	printf("Token is: %s\n", token);
 
 	if (child_process == -1)
 	{

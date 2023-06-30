@@ -12,15 +12,38 @@ char **_tokenizer(char *command, char *delimiter)
 {
 	char **store_args = malloc(sizeof(char *) * 2048);
 	int i = 0;
-	char *token;
+	char *token = NULL, *tmp = NULL, *save = NULL;
 
-	token = strtok(command, delimiter);
+	token = strtok_r(command, delimiter, &save);
 	while (token != NULL)
 	{
-		store_args[i] = malloc(strlen(token) + 1);
-		strcpy(store_args[i], token);
+		if (i == 0 && token[0] != '.')
+		{
+			if (token[0] != '/')
+			{
+				tmp = _getpath(token);
+				if (tmp == NULL)
+				{
+					free(store_args);
+					return (NULL);
+				}
+				store_args[0] = _getpath(token);
+				strcpy(store_args[i], tmp);
+				free(tmp);
+			}
+			else
+			{
+				store_args[i] = malloc(strlen(token) + 1);
+				strcpy(store_args[i], token);
+			}
+		}
+		else
+		{
+			store_args[i] = malloc(strlen(token) + 1);
+			strcpy(store_args[i], token);
+		}
 		i++;
-		token = strtok(NULL, delimiter);
+		token = strtok_r(NULL, delimiter, &save);
 	}
 	store_args[i] = NULL;
 
