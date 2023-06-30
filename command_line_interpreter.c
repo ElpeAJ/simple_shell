@@ -10,7 +10,7 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 {
 	int status_code;
 	char delimiter[] = {' ', '\n'};
-	char **args = malloc(sizeof(char *) * 2048); 
+	char **args = malloc(sizeof(char *) * 2048);
 	char *command = NULL;
 	size_t length = 0;
 	int i = 0;
