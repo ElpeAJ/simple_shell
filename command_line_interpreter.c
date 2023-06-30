@@ -8,9 +8,15 @@
  */
 int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 {
+<<<<<<< HEAD
 	int status_code;
 	char delimiter[] = {' ', '\n'};
 	char **args = malloc(sizeof(char *) * 2048);
+=======
+	int status_code = 0;
+	char *delimiter = " \t\n\r";
+	char **args = NULL;
+>>>>>>> b29cdb699b669b2905ae25a2dbc97b0e1aa0be0c
 	char *command = NULL;
 	size_t length = 0;
 	int i = 0;
@@ -27,25 +33,21 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 		if (r == -1)
 		{
 			free(command);
-			printf("\n");
 			exit(status_code);
 		}
-		i = 0;
 		args = _tokenizer(command, delimiter);
-		while (args[i] != NULL)
+		if (args[0] != NULL)
 		{
-			if (stat(args[i], &sb) == -1)
-				status_code = _perror(argv[i], command_number, args[i]);
+			if (stat(args[0], &sb) == -1)
+				status_code = _perror(argv[0], command_number, args[0]);
 			else
-				status_code = _fork(args[i], args);
+				status_code = _fork(args[0], args);
 			command_number++;
-			i++;
 		}
+		for (i = 0; args[i] != NULL; i++)
+			free(args[i]);
+		free(args);
 	}
-	free(command);
-	for (i = 0; args[i] != NULL; i++) /* free the array of strings */
-		free(args[i]);
-	free(args);
 	command = NULL;
 	return (0);
 }
