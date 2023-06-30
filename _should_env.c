@@ -18,7 +18,6 @@ void _should_env(char *command)
 		{
 			printf("current environment: %s\n", environ[i]);
 			i++;
-			free(command);
 		}
 	}
 }
