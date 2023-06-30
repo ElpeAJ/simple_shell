@@ -12,7 +12,7 @@ char *_getpath(char *command)
 	struct stat sb;
 	char *env = getenv("PATH"), *token = NULL, *s = NULL, *tmp = NULL;
 	int i = 0, j = 0;
-	
+
 	if (env == NULL)
 		return (NULL);
 	s = strdup(env);

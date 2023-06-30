@@ -26,6 +26,7 @@ int main(__attribute((unused))int argc, char **argv)
 			exit(status_code);
 		}
 		args = _tokenizer(command, delimiter);
+		_should_exit(command, status_code);
 		if (args != NULL && args[0] != NULL)
 		{
 			if (stat(args[0], &sb) == -1)
