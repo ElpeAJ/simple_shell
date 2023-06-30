@@ -10,10 +10,11 @@
 char *_getpath(char *command)
 {
 	struct stat sb;
-	char *env = getenv("PATH"), *token = NULL, *s = NULL;
-	char *tmp = NULL;
+	char *env = getenv("PATH"), *token = NULL, *s = NULL, *tmp = NULL;
 	int i = 0, j = 0;
-
+	
+	if (env == NULL)
+		return (NULL);
 	s = strdup(env);
 	token = strtok(s, ":\n");
 	while (token != NULL)

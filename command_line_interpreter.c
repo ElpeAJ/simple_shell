@@ -6,7 +6,7 @@
  * @argv: argument vector
  * Return: 0
  */
-int main(__attribute((unused))int argc, __attribute((unused))char **argv)
+int main(__attribute((unused))int argc, char **argv)
 {
 	int status_code = 0, i = 0, command_number = 1;
 	char *delimiter = " \t\n\r", *command = NULL;
