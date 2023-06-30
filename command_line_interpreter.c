@@ -31,7 +31,7 @@ int main(__attribute((unused))int argc, __attribute((unused))char **argv)
 		}
 		i = 0;
 		args = _tokenizer(command, delimiter);
-		while (args[i] != NULL)
+		if (args[i] != NULL)
 		{
 			if (stat(args[i], &sb) == -1)
 				status_code = _perror(argv[i], command_number, args[i]);
