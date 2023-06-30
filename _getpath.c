@@ -38,7 +38,6 @@ char *_getpath(char *command)
 			free(s);
 			return (tmp);
 		}
-		printf("%s\n", tmp);
 		free(tmp);
 		token = strtok(NULL, ":\n");
 	}
