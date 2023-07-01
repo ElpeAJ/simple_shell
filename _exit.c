@@ -23,8 +23,11 @@ void _should_exit(char *command, int status_code, char **args)
 				free(args[i]);
 			free(args);
 		}
-		free(args[0]);
-		free(args);
+		else
+		{
+			free(args[0]);
+			free(args);
+		}
 		exit(status_code);
 	}
 }
