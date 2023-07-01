@@ -13,13 +13,16 @@ int _should_env(char *command, char **args)
 
 	if (strcmp(command, "env") == 0)
 	{
-		for (i = 0; environ[i] != NULL; i++)
+		for (i = 0; environ != NULL && environ[i] != NULL; i++)
 		{
 			printf("%s\n", environ[i]);
 		}
-		for (i = 0; args[i] != NULL; i++)
-			free(args[i]);
-		free(args);
+		if (args != NULL)
+		{
+			for (i = 0; args[i] != NULL; i++)
+				free(args[i]);
+			free(args);
+		}
 		return (0);
 	}
 	return (1);
