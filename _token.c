@@ -17,7 +17,7 @@ char **_tokenizer(char *command, char *delimiter)
 	token = strtok_r(command, delimiter, &save);
 	while (token != NULL)
 	{
-		if (i == 0 && token[0] != '.')
+		if (i == 0 && token[0] != '.' && !strcmp(token, "exit") == 0)
 		{
 			if (token[0] != '/')
 			{

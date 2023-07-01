@@ -26,7 +26,7 @@ int main(__attribute((unused))int argc, char **argv)
 			exit(status_code);
 		}
 		args = _tokenizer(command, delimiter);
-		_should_exit(command, status_code);
+		_should_exit(command, status_code, args);
 		if (_should_env(command, args) == 0)
 			continue;
 		if (args != NULL && args[0] != NULL)
