@@ -19,6 +19,13 @@ void _should_exit(char *command, int status_code, char **args)
 		if (args != NULL && args[1] != NULL)
 		{
 			status_code = atoi(args[1]);
+			if (status_code <= 0)
+			{
+				fprintf(stderr,
+				"./hsh: 1: exit: Illegal number: %s\n",
+				args[1]);
+			}
+			status_code = (status_code <= 0) ? 2 : status_code;
 			for (i = 0; args[i] != NULL; i++)
 				free(args[i]);
 			free(args);
