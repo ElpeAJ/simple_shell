@@ -11,12 +11,9 @@ void _should_env(char *command)
 {
 	int i = 0;
 
-	if (strcmp(command, "env") == 0)
+	if ((strcmp(command, "env") == 0) && environ[i] != NULL)
 	{
-		while (environ[i] != NULL)
-		{
-			printf("%s\n", environ[i]);
-			i++;
-		}
+		printf("%s\n", environ[i]);
+		i++;
 	}
 }
